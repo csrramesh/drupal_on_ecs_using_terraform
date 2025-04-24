@@ -4,7 +4,7 @@ resource "aws_lb" "drupal_alb" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.ecs_sg.id]
-  subnets            = [aws_subnet.public.id]
+  subnets            = [aws_subnet.public.id, aws_subnet.public_b.id]
 }
 
 resource "aws_lb_target_group" "drupal_tg" {
