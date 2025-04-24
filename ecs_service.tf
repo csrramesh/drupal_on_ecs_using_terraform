@@ -15,4 +15,12 @@ resource "aws_ecs_service" "drupal_service" {
     assign_public_ip = true
     security_groups  = [aws_security_group.ecs_sg.id]
   }
+
+  load_balancer {
+    target_group_arn = aws_lb_target_group.drupal_tg.arn
+    container_name   = "drupal"
+    container_port   = 80
+  }
+
+  depends_on = [aws_lb_listener.http]
 }
